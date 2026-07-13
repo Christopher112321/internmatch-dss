@@ -4,8 +4,7 @@
 -- Metode: AHP (pembobotan kriteria) + TOPSIS (perangkingan)
 -- ============================================================
 
-CREATE DATABASE IF NOT EXISTS internmatch_dss;
-USE internmatch_dss;
+USE railway;
 
 -- ============================================================
 -- TABEL USERS
