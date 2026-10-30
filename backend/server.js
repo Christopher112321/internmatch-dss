@@ -17,11 +17,15 @@ app.use(express.json());
 
 // Routing
 app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
 app.use('/api/perusahaan', perusahaanRoutes);
+app.use('/perusahaan', perusahaanRoutes);
 app.use('/api/hasil', hasilRoutes);
+app.use('/hasil', hasilRoutes);
 app.use('/api/mahasiswa', mahasiswaRoutes);
+app.use('/mahasiswa', mahasiswaRoutes);
 
-app.get('/api', (req, res) => {
+app.get(['/api', '/'], (req, res) => {
   res.json({ message: 'InternMatch DSS API is running 🚀' });
 });
 
