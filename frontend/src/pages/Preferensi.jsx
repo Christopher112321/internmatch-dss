@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -8,6 +8,7 @@ import {
 import DashboardLayout from '../components/DashboardLayout';
 import api from '../api/axios';
 import { useToast } from '../context/ToastContext';
+import Loading from '../components/Loading';
 
 const INITIAL_KRITERIA = [
   { key: 'relevansi', label: 'Relevansi Bidang TI', icon: <FiTarget />, desc: 'Seberapa penting kesesuaian bidang magang dengan kurikulum Teknik Informatika.' },
@@ -43,8 +44,32 @@ export default function Preferensi() {
   const [list, setList] = useState(INITIAL_KRITERIA);
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingData, setLoadingData] = useState(true);
   const { showToast } = useToast();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    api.get('/hasil/preferensi')
+      .then((res) => {
+        const pref = res.data;
+        if (pref) {
+          // Sort INITIAL_KRITERIA descending based on saved Saaty rating
+          const sortedList = [...INITIAL_KRITERIA].sort((a, b) => {
+            const valA = pref[a.key] !== undefined ? Number(pref[a.key]) : 5;
+            const valB = pref[b.key] !== undefined ? Number(pref[b.key]) : 5;
+            return valB - valA;
+          });
+          setList(sortedList);
+        }
+      })
+      .catch((err) => {
+        console.error('Gagal memuat preferensi:', err);
+        showToast('Gagal memuat preferensi tersimpan.', 'error');
+      })
+      .finally(() => setLoadingData(false));
+  }, []);
+
+  if (loadingData) return <DashboardLayout title="Prioritas Kriteria Magang"><Loading /></DashboardLayout>;
 
   // Native Drag and Drop handlers
   const handleDragStart = (e, index) => {

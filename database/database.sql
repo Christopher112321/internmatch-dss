@@ -4,7 +4,8 @@
 -- Metode: AHP (pembobotan kriteria) + TOPSIS (perangkingan)
 -- ============================================================
 
-USE railway;
+CREATE DATABASE IF NOT EXISTS internmatch_dss;
+USE internmatch_dss;
 
 -- ============================================================
 -- TABEL USERS
@@ -95,13 +96,13 @@ CREATE TABLE IF NOT EXISTS hasil (
 INSERT INTO perusahaan
 (nama, bidang, lokasi, jarak_km, alamat, deskripsi, tipe_kerja, uang_saku, reputasi, relevansi_ti, peluang_rekrut, fleksibilitas)
 VALUES
-('PT Telkom Indonesia', 'Telekomunikasi & IT', 'Jakarta', 5.0, 'Jl. Jend. Gatot Subroto No.52, Jakarta', 'BUMN telekomunikasi terbesar di Indonesia dengan banyak proyek digital dan infrastruktur IT.', 'Hybrid', 2500000, 95.0, 95.0, 90.0, 70.0),
-('Bank Central Asia (BCA)', 'Perbankan & IT', 'Jakarta', 7.5, 'Jl. MH Thamrin No.1, Jakarta', 'Bank swasta terbesar dengan divisi IT yang kuat untuk sistem perbankan digital.', 'Office', 2200000, 95.0, 75.0, 75.0, 50.0),
-('Astra International', 'Otomotif & IT', 'Jakarta', 10.0, 'Jl. Gaya Motor Raya No.8, Jakarta', 'Perusahaan otomotif dengan divisi IT untuk sistem ERP dan digitalisasi bisnis.', 'Office', 2000000, 95.0, 75.0, 75.0, 50.0),
-('Shopee Indonesia', 'E-Commerce', 'Jakarta', 6.0, 'Jl. Jend. Sudirman Kav 25, Jakarta', 'Platform e-commerce terbesar di Asia Tenggara dengan tim engineering yang besar.', 'Hybrid', 3000000, 95.0, 95.0, 90.0, 70.0),
-('Tokopedia', 'E-Commerce', 'Jakarta', 8.0, 'Jl. Prof. Dr. Satrio, Jakarta', 'Platform e-commerce lokal dengan budaya kerja modern dan proyek teknologi tinggi.', 'Hybrid', 2800000, 95.0, 95.0, 90.0, 70.0),
-('Traveloka', 'Teknologi & Pariwisata', 'Jakarta', 9.0, 'Jl. Let. Jend. TB Simatupang, Jakarta', 'Perusahaan travel-tech dengan produk berbasis aplikasi mobile dan web.', 'Hybrid', 2700000, 75.0, 95.0, 75.0, 90.0),
-('Gojek (GoTo)', 'Teknologi & Transportasi', 'Jakarta', 4.5, 'Jl. Asia Afrika No.8, Jakarta', 'Super-app teknologi dengan proyek microservices dan big data skala besar.', 'Hybrid', 2900000, 95.0, 95.0, 90.0, 90.0),
-('Kementerian Kominfo', 'Pemerintahan & IT', 'Jakarta', 3.0, 'Jl. Medan Merdeka Barat No.9, Jakarta', 'Instansi pemerintah yang menangani kebijakan dan proyek digitalisasi nasional.', 'Office', 1500000, 75.0, 75.0, 55.0, 50.0),
-('PT PLN (Persero)', 'Energi & IT', 'Jakarta', 12.0, 'Jl. Trunojoyo Blok M I/135, Jakarta', 'BUMN kelistrikan dengan sistem informasi skala nasional dan smart grid.', 'Office', 1800000, 75.0, 75.0, 55.0, 50.0),
-('Dinas Kominfo Kota Semarang', 'Pemerintahan & IT', 'Semarang', 2.0, 'Jl. Pemuda No.148, Semarang', 'Instansi pemerintah daerah yang mengelola sistem informasi dan layanan publik digital kota.', 'Office', 1200000, 75.0, 75.0, 55.0, 70.0);
+('PT Telkom Indonesia', 'Telekomunikasi & IT', 'Jakarta', 2.5, 'Jl. Jend. Gatot Subroto No.52, Jakarta', 'BUMN telekomunikasi terbesar di Indonesia dengan banyak proyek digital dan infrastruktur IT.', 'Hybrid', 1500000, 95.0, 75.0, 55.0, 50.0),
+('Bank Central Asia (BCA)', 'Perbankan & IT', 'Jakarta', 12.0, 'Jl. MH Thamrin No.1, Jakarta', 'Bank swasta terbesar dengan divisi IT yang kuat untuk sistem perbankan digital.', 'Office', 2500000, 95.0, 75.0, 90.0, 30.0),
+('Astra International', 'Otomotif & IT', 'Jakarta', 8.5, 'Jl. Gaya Motor Raya No.8, Jakarta', 'Perusahaan otomotif dengan divisi IT untuk sistem ERP dan digitalisasi bisnis.', 'Office', 1800000, 95.0, 55.0, 75.0, 50.0),
+('Shopee Indonesia', 'E-Commerce', 'Jakarta', 15.0, 'Jl. Jend. Sudirman Kav 25, Jakarta', 'Platform e-commerce terbesar di Asia Tenggara dengan tim engineering yang besar.', 'Hybrid', 3000000, 95.0, 95.0, 75.0, 30.0),
+('Tokopedia', 'E-Commerce', 'Jakarta', 9.0, 'Jl. Prof. Dr. Satrio, Jakarta', 'Platform e-commerce lokal dengan budaya kerja modern dan proyek teknologi tinggi.', 'Hybrid', 2800000, 75.0, 95.0, 75.0, 70.0),
+('Traveloka', 'Teknologi & Pariwisata', 'Jakarta', 10.5, 'Jl. Let. Jend. TB Simatupang, Jakarta', 'Perusahaan travel-tech dengan produk berbasis aplikasi mobile dan web.', 'Hybrid', 2000000, 75.0, 95.0, 55.0, 90.0),
+('Gojek (GoTo)', 'Teknologi & Transportasi', 'Jakarta', 6.0, 'Jl. Asia Afrika No.8, Jakarta', 'Super-app teknologi dengan proyek microservices dan big data skala besar.', 'Hybrid', 1200000, 95.0, 95.0, 75.0, 70.0),
+('Kementerian Kominfo', 'Pemerintahan & IT', 'Jakarta', 4.0, 'Jl. Medan Merdeka Barat No.9, Jakarta', 'Instansi pemerintah yang menangani kebijakan dan proyek digitalisasi nasional.', 'Office', 800000, 75.0, 55.0, 30.0, 50.0),
+('PT PLN (Persero)', 'Energi & IT', 'Jakarta', 7.0, 'Jl. Trunojoyo Blok M I/135, Jakarta', 'BUMN kelistrikan dengan sistem informasi skala nasional dan smart grid.', 'Office', 1400000, 75.0, 55.0, 55.0, 30.0),
+('Dinas Kominfo Kota Semarang', 'Pemerintahan & IT', 'Semarang', 1.2, 'Jl. Pemuda No.148, Semarang', 'Instansi pemerintah daerah yang mengelola sistem informasi dan layanan publik digital kota.', 'Office', 500000, 55.0, 55.0, 30.0, 70.0);

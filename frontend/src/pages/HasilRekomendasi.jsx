@@ -102,7 +102,7 @@ export default function HasilRekomendasi() {
                     Peringkat #{r.ranking}
                   </span>
                 </div>
-                <h3 className="font-extrabold text-lg text-slate-800 dark:text-slate-150 mb-2 leading-tight">{r.nama}</h3>
+                <h3 className="font-extrabold text-lg text-slate-800 dark:text-white mb-2 leading-tight">{r.nama}</h3>
                 <p className="text-xs text-slate-400 font-semibold mb-4">
                   Nilai Preferensi: <strong className="text-primary-650 dark:text-primary-400 font-bold text-sm ml-1">{num(r.nilai_preferensi)}</strong>
                 </p>
@@ -140,15 +140,11 @@ export default function HasilRekomendasi() {
                     {row.map((v, j) => <td key={j} className="font-medium">{num(v, 3)}</td>)}
                   </tr>
                 ))}
-                <tr className="font-bold bg-primary-50/20 dark:bg-slate-800/50 text-primary-750 dark:text-primary-350 border-t-2 border-primary-100/30">
-                  <td>Jumlah Kolom</td>
-                  {ahp.jumlahKolom.map((v, j) => <td key={j} className="font-extrabold">{num(v, 3)}</td>)}
-                </tr>
               </tbody>
             </table>
           </Section>
 
-          <Section title="2. Matriks Normalisasi">
+          <Section title="2. Normalisasi Matriks & Jumlah Kolom">
             <table className="dss-table">
               <thead>
                 <tr>
@@ -163,6 +159,10 @@ export default function HasilRekomendasi() {
                     {row.map((v, j) => <td key={j} className="font-medium">{num(v, 3)}</td>)}
                   </tr>
                 ))}
+                <tr className="font-bold bg-primary-50/20 dark:bg-slate-800/50 text-primary-750 dark:text-primary-350 border-t-2 border-primary-100/30">
+                  <td>Jumlah Kolom</td>
+                  {ahp.jumlahKolom.map((v, j) => <td key={j} className="font-extrabold">{num(v, 3)}</td>)}
+                </tr>
               </tbody>
             </table>
           </Section>

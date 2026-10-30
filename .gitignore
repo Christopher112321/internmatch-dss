@@ -4,3 +4,8 @@ dist/
 build/
 *.log
 .DS_Store
+.agents/
+mysql
+test.py
+backend/test/
+
